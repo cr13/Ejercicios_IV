@@ -77,11 +77,30 @@ Si, me funcionan las tres versiones que tengo instaladas.
 
 ![Prueba de diferentes versiones de NVM](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/pruebadeversiones_zpsrubqovwh.png)
 
-
 ----------
 
 ###**Ejercicio 4**:Crear una descripción del módulo usando **package.json**. En caso de que se trate de otro lenguaje, usar el método correspondiente.
 
+Mi package.json
+
+    {
+      "name": "application-name",
+      "version": "0.0.1",
+      "private": true,
+      "scripts": {
+          "start": "nodejs ./bin/www"
+      },
+      "dependencies": {
+          "express": "~4.0.0",
+          "static-favicon": "~1.0.0",
+          "morgan": "~1.0.0",
+          "cookie-parser": "~1.0.1",
+          "body-parser": "~1.0.0",
+          "debug": "~0.7.4",
+          "jade": "~1.3.0",
+          "mysql": "~2.9.0"
+      }
+    }
 
 
 ----------
