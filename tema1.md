@@ -19,11 +19,11 @@ Sobre el equipo:
 
 Vamos a calcular su amortización:
 
-- Precio con IVA:  769 € 
+- Precio con IVA:  769 €
 
 - IVA (21%): 133.46€
 
-- Total Sin IVA:  635,54 € 
+- Total Sin IVA:  635,54 €
 
 **Amortización a 4 años** es la siguiente teniendo en cuenta que corresponde a un 25% por año:
 
@@ -33,7 +33,7 @@ Vamos a calcular su amortización:
 Si consideramos que el servidor  se amortiza más los primeros años y menos los últimos años, tenemos que cada año:
 
 - **Primer año:** 769 * 0.25  = 192.25€
-- **Segundo año:** 769 * 0.25 = 192.25€ 
+- **Segundo año:** 769 * 0.25 = 192.25€
 - **Tercer año:** 769 * 0.15 = 115.35€
 -  **Cuarto año:** 769 * 0.15 = 115.35€
 - **Quinto año:** 769 * 0.10 = 76.9€
@@ -60,7 +60,7 @@ Es una instancia [A3](https://azure.microsoft.com/es-es/pricing/calculator/):
 
 - **Procesador:** 4 núcleos
 - **RAM:**  7 GB
-- **Disco Duro:** 285GB 
+- **Disco Duro:** 285GB
 - **Coste:**  0,202 €/h
 
 **Si se usa el 1% del tiempo:**
@@ -83,7 +83,7 @@ Como acabamos de demostrar  la opción de usar máquinas virtuales en la nube es
 
 Para una virtualización plena o completa usaría máquinas virtuales ya que se pueden tener varios sistemas operativos completos y distintos, utilizando hipervisores como son VMware Player o VirtualBox, etc.
 
-Si quisiéramos ejecutar aplicaciones de  Windows u otro sistema operativo en Linux, cómo por ejemplo, usando WINE usaría una virtualización de aplicación 
+Si quisiéramos ejecutar aplicaciones de  Windows u otro sistema operativo en Linux, cómo por ejemplo, usando WINE usaría una virtualización de aplicación
 
 Si quisiéramos tener nuestro servicio de almacenamiento, virtualizando la memoria utilizaría virtualización parcial ya que nos facilita la escalabilidad del hardware y el control de errores
 
@@ -95,10 +95,10 @@ Usaría la virtualización de entornos de desarrollo en el caso de tener que usa
 El programa creado es:
 
     # Fichero ejer3.py
-    
+
     #!/usr/bin/env python
 	import math
-	
+
 	def cribaEratostenes(lista):
 		n= lista[len(lista)-1]
 		raiz = math.sqrt(n)
@@ -108,32 +108,32 @@ El programa creado es:
 				if lista[j]%lista[i] == 0:
 					lista.pop(j)
 				j+=1
-					
+
 		print lista
-	
+
 	tope = int(raw_input("Escriba un numero natural: "))
 	lista=list(range(2,tope+1))
 	cribaEratostenes(lista)
-	
+
 Lo siguiente que he hecho ha sido instalar cde en mi equipo, para ello:
 
     sudo apt-get install cde
 Después empaquetamos el script con:
 
-`cde python ejer3.py  ` 
+`cde python ejer3.py  `
 
-Nos situamos en el directorio  /Ejercicios/cde-package/cde-root/Ejercicios  donde encontramos el fichero **python.cde** 
+Nos situamos en el directorio  /Ejercicios/cde-package/cde-root/Ejercicios  donde encontramos el fichero **python.cde**
 
-    vagrant@vagrant:/Ejercicios$ cd cde-package/cde-root/Ejercicios/$ ./python.cde ejer3.py 
+    vagrant@vagrant:/Ejercicios$ cd cde-package/cde-root/Ejercicios/$ ./python.cde ejer3.py
     Escriba un numero natural: 5
 	[2, 3, 5]
-    
+
 ----------
 ###**Ejercicio 4**:Comprobar si el procesador o procesadores instalados tienen estos flags. ¿Qué modelo de procesador es? ¿Qué aparece como salida de esa orden?
 
 
 Con el comando:
-    
+
     cat /proc/cpuinfo
 
 El modelo de procesador es el :
