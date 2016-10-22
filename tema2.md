@@ -66,12 +66,16 @@ Si se quiere hacer con cualquier otra aplicación, también es válido. Se trata
 Para la realización de este ejercicio he creado una página web y he tenido que instalar xampp, jade y express.
 
 ![Página Principal](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/ejer2Tema2_zps5qizl7nd.png)
+
 [Enlace a mi repositorio](https://github.com/cr13/Califica_empresas)
 
 ----------
 
 ###**Ejercicio 3**:Ejecutar el programa en diferentes versiones del lenguaje. ¿Funciona en todas ellas?
 
+Si, me funcionan las tres versiones que tengo instaladas.
+
+![Prueba de diferentes versiones de NVM](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/pruebadeversiones_zpsrubqovwh.png)
 
 
 ----------
