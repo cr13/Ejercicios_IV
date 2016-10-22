@@ -63,12 +63,11 @@ borrar calificación (si se arrepiente o te denuncia la empresa o algo)
 - Crear un repositorio en GitHub para la librería y crear un pequeño programa que use algunas de sus funcionalidades.
 
 Si se quiere hacer con cualquier otra aplicación, también es válido. Se trata de hacer una aplicación simple que se pueda hacer rápidamente con un generador de aplicaciones como los que incluyen diferentes marcos MVC. Si cuesta mucho trabajo, simplemente prepara una aplicación que puedas usar más adelante en el resto de los ejercicios.
-
 Para la realización de este ejercicio he creado una página web y he tenido que instalar xampp, jade y express.
 
 ![Página Principal](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/ejer2Tema2_zps5qizl7nd.png)
-
 [Enlace a mi repositorio](https://github.com/cr13/Califica_empresas)
+
 ----------
 
 ###**Ejercicio 3**:Ejecutar el programa en diferentes versiones del lenguaje. ¿Funciona en todas ellas?
