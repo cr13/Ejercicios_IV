@@ -137,58 +137,32 @@ Tenemos que instalar:
     - npm install -g grunt-cli
     - npm install docco grunt-docco --save-dev
 
-Una vez instalado, nos vamos al directorio raiz de grunt-docco en mi caso se ha creado en node_modules/grunt-docco dentro de mi proyecto.
+Una vez instalado, nos vamos al directorio raiz del proyecto y nos creamos el Gruntfile.js.
 
 Conetenio de Gruntfile.js
 
+    'use strict';
+
     module.exports = function(grunt) {
 
+      // Configuración del proyecto
       grunt.initConfig({
-        clean: { tests: ["docs"] },
-
-        jshint: {
-          grunt: ['Gruntfile.js'],
-          tasks: ['tasks/docco.js'],
-          tests: ['test/*.js'],
+      pkg: grunt.file.readJSON('package.json'),
+      docco: {
+          debug: {
+          src: ['*.js'],
           options: {
-            node: true
+              output: 'docs/'
           }
-        },
-
-        docco: {
-          tests: {
-            src: ['test/**/*.js', 'test/**/*.coffee'],
-            dest: "docs/"
-          },
-          'custom-css-test': {
-            src: ['test/**/*.js'],
-            dest: 'docs/',
-            options: {
-                css: 'test/fixtures/custom.css',
-                output: 'docs/'
-            }
           }
-        },
-
-        nodeunit: {
-          tests: ['test/*_test.js']
-        }
+      }
       });
 
-      grunt.loadTasks('tasks');
-
-      grunt.loadNpmTasks('grunt-contrib-nodeunit');
-      grunt.loadNpmTasks('grunt-contrib-jshint');
-      grunt.loadNpmTasks('grunt-contrib-clean');
-      grunt.loadNpmTasks('grunt-release');
       // Carga el plugin de grunt para hacer esto
       grunt.loadNpmTasks('grunt-docco');
 
       // Tarea por omisión: generar la documentación
       grunt.registerTask('default', ['docco']);
-      grunt.registerTask('test', ['clean:tests', 'docco', 'nodeunit:tests']);
-      grunt.registerTask('lint', ['jshint:grunt', 'jshint:tasks', 'jshint:tests']);
-      grunt.registerTask('default', ['lint', 'docco']);
     };
 
 Ahora, solo nos faltaría generar la documentación con el comando << grunt docco >>.
