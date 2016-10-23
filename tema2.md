@@ -107,144 +107,104 @@ Mi package.json
 
 ###**Ejercicio 5**:Automatizar con **grunt** y **docco** (o algún otro sistema) la generación de documentación de la librería que se cree. Previamente, por supuesto, habrá que documentar tal librería.
 
+Tenemos que instalar:
 
+    - npm install -g grunt-cli
+    - npm install docco grunt-docco --save-dev
+
+Una vez instalado, nos vamos al directorio raiz del proyecto y nos creamos el Gruntfile.js.
+
+Conetenio de Gruntfile.js
+
+    'use strict';
+
+    module.exports = function(grunt) {
+
+      // Configuración del proyecto
+      grunt.initConfig({
+      pkg: grunt.file.readJSON('package.json'),
+      docco: {
+          debug: {
+          src: ['*.js'],
+          options: {
+              output: 'docs/'
+          }
+          }
+      }
+      });
+
+      // Carga el plugin de grunt para hacer esto
+      grunt.loadNpmTasks('grunt-docco');
+
+      // Tarea por omisión: generar la documentación
+      grunt.registerTask('default', ['docco']);
+    };
+
+Ahora, solo nos faltaría generar la documentación con el comando << grunt docco >>.
+La documentación se generará en el directorio docs.
 
 ----------
 
 ###**Ejercicio 6**:Para la aplicación que se está haciendo, escribir una serie de aserciones y probar que efectivamente no fallan. Añadir tests para una nueva funcionalidad, probar que falla y escribir el código para que no lo haga (vamos, lo que viene siendo TDD).
 
+    //Permite mostrar todas las empresas y sus respectivas puntuaciones
+     app.get('/mostrarclasificacion',  function(req, res){
+       var objBD = BD();
+       objBD.query('SELECT * FROM ranking', function( error, resultado, fila){
+         assert.ok(!error,"Error en la consulta del ranking");
+         assert.notEqual(resultado.length,0,"No exisite niguna puntuación en estos momentos");
+         res.render('ranking', {datos:resultado } );
+       });
+     });
 
+  ----------
 
-----------
+  ###**Ejercicio 7**:Convertir los tests unitarios anteriores con assert a programas de test y ejecutarlos desde **mocha**, usando descripciones del test y del grupo de test de forma correcta. Si hasta ahora no has subido el código que has venido realizando a GitHub, es el momento de hacerlo, porque lo vas a necesitar un poco más adelante.
 
-###**Ejercicio 7**:Convertir los tests unitarios anteriores con assert a programas de test y ejecutarlos desde **mocha**, usando descripciones del test y del grupo de test de forma correcta. Si hasta ahora no has subido el código que has venido realizando a GitHub, es el momento de hacerlo, porque lo vas a necesitar un poco más adelante.
+ 1º Preparamos nuestro test.js
+    var assert = require('assert');
+     var mysql = require('mysql');
 
+     //----------------------------------------------------------------
+     //Funcion para conectar a la base de datos
+     function BD(){
+       var conexion = mysql.createConnection({
+         host: 'localhost',
+         user: 'root',
+         password: 'cr',
+         port: 3306,
+         database: 'clasifica_empresa'
+       });
+       return conexion;
+     }
 
+     //----------------------------------------------------------------
+
+     describe("Prueba Test",function(done){
+       //Permite insertar una nueva empresa en el sistema
+       it("Insertar una nueva empresa",function(){
+         var objBD = BD();
+     	  objBD.query('INSERT INTO `clasifica_empresa`.`empresas` (`nombre_empresa`) VALUES ("daitsu")', function( error ){
+            assert.ok(!error,"Error al insertar la empresa");
+            objBD.end(done);
+         });
+       });
+       //Permite mostrar todas las empresas del sistema que un usuario dado no ha votado
+       it("Mostrar listado de empresas que faltan por votar",function(){
+         var objBD = BD();
+         objBD.query('SELECT `ID`,`nombre_empresa` FROM empresa WHERE not EXISTS (select voto.IDempresa from voto where empresa.ID=voto.IDempresa and voto.Borrado='+1+' and voto.DNIvotante='+254785236+')', function( error,resultado,fila){
+           assert.ok(!error,"Error en la consulta de empresas");
+           assert.notEqual(resultado.length,0,"No hay empresas en el sistema o ya has votado en todas");
+           objBD.end(done);
+         });
+       });
+     });
+
+ 2º Instalamos npm install -g mocha
+ 3º Probamos nuestro test con mocha test/test.js
+
+ ![mocha test](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/mochoo_zps7j2tdozp.png)
 
 ----------
 
 ###**Ejercicio 8**:Haced los dos primeros pasos antes de pasar al tercero.
-
-Para la comparativa he escogido por un lado un servidor dedicado que ofrece  [leaseweb](https://www.leaseweb.com/dedicated-server/configure/23895) con las siguientes características:
-
-![xeon](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/ejer2a_zps1nvq2srm.png)
-
-- **Procesador:** Intel Quad Core X3430
-- **RAM:**  8GB
-- **Disco Duro:**  2x500GB SATA2  
-- **Coste:**  45.99€/mes
-
-Por otro lado he escogido una máquina virtual de Azure con las siguientes carácteristicas:
-
-Es una instancia [A3](https://azure.microsoft.com/es-es/pricing/calculator/):
-
-![Azure](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/ejer2b_zpsijsfptd3.png)
-
-- **Procesador:** 4 núcleos
-- **RAM:**  7 GB
-- **Disco Duro:** 285GB
-- **Coste:**  0,202 €/h
-
-**Si se usa el 1% del tiempo:**
-
-Precio del servidor dedicado en Leaseweb: 45.99€/mes * 12 meses = **551,88€**
-
-Precio del servidor Azure( en la nube ): 0,202 €/h =>150,58 €/MES * 0.01 = 1.5058€/MES  * 12 Meses = **18.07€**
-
-**Si se usa el 10% del tiempo:**
-
-Precio del servidor dedicado en Leaseweb: 45.99€/mes * 12 meses = **551,88€**
-
-Precio del servidor Azure( en la nube ): 0,202 €/h =>150,58 €/MES *  0.1 = 15.058€/Mes * 12 Meses = **180.7€**
-
-Como acabamos de demostrar  la opción de usar máquinas virtuales en la nube es mucho más económica que la opción de utilizar un servidor dedicado.
-
-
-----------
-###**Ejercicio 3.1**:¿Qué tipo de virtualización usarías en cada caso? [Comentar en el foro](https://github.com/JJ/IV16-17/issues/1)
-
-Para una virtualización plena o completa usaría máquinas virtuales ya que se pueden tener varios sistemas operativos completos y distintos, utilizando hipervisores como son VMware Player o VirtualBox, etc.
-
-Si quisiéramos ejecutar aplicaciones de  Windows u otro sistema operativo en Linux, cómo por ejemplo, usando WINE usaría una virtualización de aplicación
-
-Si quisiéramos tener nuestro servicio de almacenamiento, virtualizando la memoria utilizaría virtualización parcial ya que nos facilita la escalabilidad del hardware y el control de errores
-
-Usaría la virtualización de entornos de desarrollo en el caso de tener que usar dos versiones de phyton y evitar así crear conflictos con el sistema u otros proyectos.
-
-----------
-###**Ejercicio 3.2**:Crear un programa simple en cualquier lenguaje interpretado para Linux, empaquetarlo con CDE y probarlo en diferentes distribuciones.
-
-El programa creado es:
-
-    # Fichero ejer3.py
-
-    #!/usr/bin/env python
-	import math
-
-	def cribaEratostenes(lista):
-		n= lista[len(lista)-1]
-		raiz = math.sqrt(n)
-		for i in range(int(raiz)):
-			j=i+1
-			while j <len(lista):
-				if lista[j]%lista[i] == 0:
-					lista.pop(j)
-				j+=1
-
-		print lista
-
-	tope = int(raw_input("Escriba un numero natural: "))
-	lista=list(range(2,tope+1))
-	cribaEratostenes(lista)
-
-Lo siguiente que he hecho ha sido instalar cde en mi equipo, para ello:
-
-    sudo apt-get install cde
-Después empaquetamos el script con:
-
-`cde python ejer3.py  `
-
-Nos situamos en el directorio  /Ejercicios/cde-package/cde-root/Ejercicios  donde encontramos el fichero **python.cde**
-
-    vagrant@vagrant:/Ejercicios$ cd cde-package/cde-root/Ejercicios/$ ./python.cde ejer3.py
-    Escriba un numero natural: 5
-	[2, 3, 5]
-
-----------
-###**Ejercicio 4**:Comprobar si el procesador o procesadores instalados tienen estos flags. ¿Qué modelo de procesador es? ¿Qué aparece como salida de esa orden?
-
-
-Con el comando:
-
-    cat /proc/cpuinfo
-
-El modelo de procesador es el :
-
-	Intel(R) Core(TM) i7-3632QM CPU @ 2.20GHz
-
-Para la salida que aparece al visualizar los flags es la siguiente::
-
-    egrep '^flags.*(vmx|svm)' /proc/cpuinfo
-Obtengo la salida:
-![Flags](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/flag_zpsdulstv8i.png)
-
-Como podemos observar mi equipo dispone de capacidades para la virtualización.
-
-----------
-###**Ejercicio 5.1**: Comprobar si el núcleo instalado en tu ordenador contiene este módulo del kernel usando la orden kvm-ok.
-
-Lo primero que debemos hacer es instalar kvm:
-
-    sudo apt-get install cpu-checker
-
-Ahora desde la terminal ejecutamos:
-
-	 sudo kvm-ok
-![KVM-OK](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/kvm-ok_zps4uwlthlb.png)
-
-
-
-----------
-###**Ejercicio 5.2**:  Instalar un hipervisor para gestionar máquinas virtuales, que más adelante se podrá usar en pruebas y ejercicios.
-
-Ya tenia instalado Virtualbox y VMware.
