@@ -81,50 +81,25 @@ Si, me funcionan las tres versiones que tengo instaladas.
 
 ###**Ejercicio 4**:Crear una descripción del módulo usando **package.json**. En caso de que se trate de otro lenguaje, usar el método correspondiente.
 
-Crear o actualizar package.json
-
-    - npm install -g grunt-cli
-    - Dentro de la carpeta de nuestro proyecto
-      - npm init (completamos el formulario y ponemos yes)
-
-Yo tenia creado ya el package.json y al realizar los pasos se me ha autocompletado.
+Mi package.json
 
     {
-      "name": "clasifica_empresas",
+      "name": "application-name",
       "version": "0.0.1",
       "private": true,
       "scripts": {
-        "start": "nodejs ./bin/www"
+          "start": "nodejs ./bin/www"
       },
       "dependencies": {
-        "express": "~4.0.0",
-        "static-favicon": "~1.0.0",
-        "morgan": "~1.0.0",
-        "cookie-parser": "~1.0.1",
-        "body-parser": "~1.0.0",
-        "debug": "~0.7.4",
-        "jade": "~1.3.0",
-        "mysql": "~2.9.0"
-      },
-      "devDependencies": {
-        "docco": "^0.7.0",
-        "grunt": "^0.4.5",
-        "grunt-docco": "^0.4.0",
-        "should": "^7.1.1",
-        "supertest": "^1.1.0"
-      },
-      "description": "Sitio Web con las siguientes funcionalidades:",
-      "main": "app.js",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/cr13/Califica_empresas.git"
-      },
-      "author": "Cristóbal Rodríguez Reina",
-      "license": "ISC",
-      "bugs": {
-        "url": "https://github.com/cr13/Califica_empresas/issues"
-      },
-      "homepage": "https://github.com/cr13/Califica_empresas#readme"
+          "express": "~4.0.0",
+          "static-favicon": "~1.0.0",
+          "morgan": "~1.0.0",
+          "cookie-parser": "~1.0.1",
+          "body-parser": "~1.0.0",
+          "debug": "~0.7.4",
+          "jade": "~1.3.0",
+          "mysql": "~2.9.0"
+      }
     }
 
 
@@ -132,67 +107,7 @@ Yo tenia creado ya el package.json y al realizar los pasos se me ha autocompleta
 
 ###**Ejercicio 5**:Automatizar con **grunt** y **docco** (o algún otro sistema) la generación de documentación de la librería que se cree. Previamente, por supuesto, habrá que documentar tal librería.
 
-Tenemos que instalar:
 
-    - npm install -g grunt-cli
-    - npm install docco grunt-docco --save-dev
-
-Una vez instalado, nos vamos al directorio raiz de grunt-docco en mi caso se ha creado en node_modules/grunt-docco dentro de mi proyecto.
-
-Conetenio de Gruntfile.js
-
-    module.exports = function(grunt) {
-
-      grunt.initConfig({
-        clean: { tests: ["docs"] },
-
-        jshint: {
-          grunt: ['Gruntfile.js'],
-          tasks: ['tasks/docco.js'],
-          tests: ['test/*.js'],
-          options: {
-            node: true
-          }
-        },
-
-        docco: {
-          tests: {
-            src: ['test/**/*.js', 'test/**/*.coffee'],
-            dest: "docs/"
-          },
-          'custom-css-test': {
-            src: ['test/**/*.js'],
-            dest: 'docs/',
-            options: {
-                css: 'test/fixtures/custom.css',
-                output: 'docs/'
-            }
-          }
-        },
-
-        nodeunit: {
-          tests: ['test/*_test.js']
-        }
-      });
-
-      grunt.loadTasks('tasks');
-
-      grunt.loadNpmTasks('grunt-contrib-nodeunit');
-      grunt.loadNpmTasks('grunt-contrib-jshint');
-      grunt.loadNpmTasks('grunt-contrib-clean');
-      grunt.loadNpmTasks('grunt-release');
-      // Carga el plugin de grunt para hacer esto
-      grunt.loadNpmTasks('grunt-docco');
-
-      // Tarea por omisión: generar la documentación
-      grunt.registerTask('default', ['docco']);
-      grunt.registerTask('test', ['clean:tests', 'docco', 'nodeunit:tests']);
-      grunt.registerTask('lint', ['jshint:grunt', 'jshint:tasks', 'jshint:tests']);
-      grunt.registerTask('default', ['lint', 'docco']);
-    };
-
-Ahora, solo nos faltaría generar la documentación con el comando << grunt docco >>.
-La documentación se generará en el directorio docs.
 
 ----------
 
@@ -209,3 +124,127 @@ La documentación se generará en el directorio docs.
 ----------
 
 ###**Ejercicio 8**:Haced los dos primeros pasos antes de pasar al tercero.
+
+Para la comparativa he escogido por un lado un servidor dedicado que ofrece  [leaseweb](https://www.leaseweb.com/dedicated-server/configure/23895) con las siguientes características:
+
+![xeon](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/ejer2a_zps1nvq2srm.png)
+
+- **Procesador:** Intel Quad Core X3430
+- **RAM:**  8GB
+- **Disco Duro:**  2x500GB SATA2  
+- **Coste:**  45.99€/mes
+
+Por otro lado he escogido una máquina virtual de Azure con las siguientes carácteristicas:
+
+Es una instancia [A3](https://azure.microsoft.com/es-es/pricing/calculator/):
+
+![Azure](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/ejer2b_zpsijsfptd3.png)
+
+- **Procesador:** 4 núcleos
+- **RAM:**  7 GB
+- **Disco Duro:** 285GB
+- **Coste:**  0,202 €/h
+
+**Si se usa el 1% del tiempo:**
+
+Precio del servidor dedicado en Leaseweb: 45.99€/mes * 12 meses = **551,88€**
+
+Precio del servidor Azure( en la nube ): 0,202 €/h =>150,58 €/MES * 0.01 = 1.5058€/MES  * 12 Meses = **18.07€**
+
+**Si se usa el 10% del tiempo:**
+
+Precio del servidor dedicado en Leaseweb: 45.99€/mes * 12 meses = **551,88€**
+
+Precio del servidor Azure( en la nube ): 0,202 €/h =>150,58 €/MES *  0.1 = 15.058€/Mes * 12 Meses = **180.7€**
+
+Como acabamos de demostrar  la opción de usar máquinas virtuales en la nube es mucho más económica que la opción de utilizar un servidor dedicado.
+
+
+----------
+###**Ejercicio 3.1**:¿Qué tipo de virtualización usarías en cada caso? [Comentar en el foro](https://github.com/JJ/IV16-17/issues/1)
+
+Para una virtualización plena o completa usaría máquinas virtuales ya que se pueden tener varios sistemas operativos completos y distintos, utilizando hipervisores como son VMware Player o VirtualBox, etc.
+
+Si quisiéramos ejecutar aplicaciones de  Windows u otro sistema operativo en Linux, cómo por ejemplo, usando WINE usaría una virtualización de aplicación
+
+Si quisiéramos tener nuestro servicio de almacenamiento, virtualizando la memoria utilizaría virtualización parcial ya que nos facilita la escalabilidad del hardware y el control de errores
+
+Usaría la virtualización de entornos de desarrollo en el caso de tener que usar dos versiones de phyton y evitar así crear conflictos con el sistema u otros proyectos.
+
+----------
+###**Ejercicio 3.2**:Crear un programa simple en cualquier lenguaje interpretado para Linux, empaquetarlo con CDE y probarlo en diferentes distribuciones.
+
+El programa creado es:
+
+    # Fichero ejer3.py
+
+    #!/usr/bin/env python
+	import math
+
+	def cribaEratostenes(lista):
+		n= lista[len(lista)-1]
+		raiz = math.sqrt(n)
+		for i in range(int(raiz)):
+			j=i+1
+			while j <len(lista):
+				if lista[j]%lista[i] == 0:
+					lista.pop(j)
+				j+=1
+
+		print lista
+
+	tope = int(raw_input("Escriba un numero natural: "))
+	lista=list(range(2,tope+1))
+	cribaEratostenes(lista)
+
+Lo siguiente que he hecho ha sido instalar cde en mi equipo, para ello:
+
+    sudo apt-get install cde
+Después empaquetamos el script con:
+
+`cde python ejer3.py  `
+
+Nos situamos en el directorio  /Ejercicios/cde-package/cde-root/Ejercicios  donde encontramos el fichero **python.cde**
+
+    vagrant@vagrant:/Ejercicios$ cd cde-package/cde-root/Ejercicios/$ ./python.cde ejer3.py
+    Escriba un numero natural: 5
+	[2, 3, 5]
+
+----------
+###**Ejercicio 4**:Comprobar si el procesador o procesadores instalados tienen estos flags. ¿Qué modelo de procesador es? ¿Qué aparece como salida de esa orden?
+
+
+Con el comando:
+
+    cat /proc/cpuinfo
+
+El modelo de procesador es el :
+
+	Intel(R) Core(TM) i7-3632QM CPU @ 2.20GHz
+
+Para la salida que aparece al visualizar los flags es la siguiente::
+
+    egrep '^flags.*(vmx|svm)' /proc/cpuinfo
+Obtengo la salida:
+![Flags](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/flag_zpsdulstv8i.png)
+
+Como podemos observar mi equipo dispone de capacidades para la virtualización.
+
+----------
+###**Ejercicio 5.1**: Comprobar si el núcleo instalado en tu ordenador contiene este módulo del kernel usando la orden kvm-ok.
+
+Lo primero que debemos hacer es instalar kvm:
+
+    sudo apt-get install cpu-checker
+
+Ahora desde la terminal ejecutamos:
+
+	 sudo kvm-ok
+![KVM-OK](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/kvm-ok_zps4uwlthlb.png)
+
+
+
+----------
+###**Ejercicio 5.2**:  Instalar un hipervisor para gestionar máquinas virtuales, que más adelante se podrá usar en pruebas y ejercicios.
+
+Ya tenia instalado Virtualbox y VMware.
