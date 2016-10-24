@@ -180,13 +180,12 @@ La documentación se generará en el directorio docs.
 
      //----------------------------------------------------------------
 
-     describe("Prueba Test",function(done){
+     describe("Prueba Test",function(){
        //Permite insertar una nueva empresa en el sistema
        it("Insertar una nueva empresa",function(){
          var objBD = BD();
      	  objBD.query('INSERT INTO `clasifica_empresa`.`empresas` (`nombre_empresa`) VALUES ("daitsu")', function( error ){
             assert.ok(!error,"Error al insertar la empresa");
-            objBD.end(done);
          });
        });
        //Permite mostrar todas las empresas del sistema que un usuario dado no ha votado
@@ -195,7 +194,6 @@ La documentación se generará en el directorio docs.
          objBD.query('SELECT `ID`,`nombre_empresa` FROM empresa WHERE not EXISTS (select voto.IDempresa from voto where empresa.ID=voto.IDempresa and voto.Borrado='+1+' and voto.DNIvotante='+254785236+')', function( error,resultado,fila){
            assert.ok(!error,"Error en la consulta de empresas");
            assert.notEqual(resultado.length,0,"No hay empresas en el sistema o ya has votado en todas");
-           objBD.end(done);
          });
        });
      });
@@ -208,3 +206,12 @@ La documentación se generará en el directorio docs.
 ----------
 
 ###**Ejercicio 8**:Haced los dos primeros pasos antes de pasar al tercero.
+1º Darse de alta. Muchos están conectados con GitHub por lo que puedes autentificarte directamente desde ahí. A través de un proceso de autorización, puedes acceder al contenido e incluso informar del resultado de los tests a GitHub.
+
+2º Activar el repositorio en el que se vaya a aplicar la integración continua. Travis permite hacerlo directamente desde tu configuración; en otros se dan de alta desde la web de GitHub.
+
+![Activando mi repositorio](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/travis%20act_zpslnonebxa.png)
+
+3º Crear un fichero de configuración para que se ejecute la integración y añadirlo al repositorio.
+
+![PruebaTestTravis](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/pruebatravis_zpsyoglfuf4.png)
