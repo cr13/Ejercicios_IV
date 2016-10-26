@@ -82,25 +82,62 @@ Si, me funcionan las tres versiones que tengo instaladas.
 ###**Ejercicio 4**:Crear una descripción del módulo usando **package.json**. En caso de que se trate de otro lenguaje, usar el método correspondiente.
 
 Mi package.json
+ Crear o actualizar package.json
 
-    {
-      "name": "application-name",
-      "version": "0.0.1",
-      "private": true,
-      "scripts": {
-          "start": "nodejs ./bin/www"
-      },
-      "dependencies": {
-          "express": "~4.0.0",
-          "static-favicon": "~1.0.0",
-          "morgan": "~1.0.0",
-          "cookie-parser": "~1.0.1",
-          "body-parser": "~1.0.0",
-          "debug": "~0.7.4",
-          "jade": "~1.3.0",
-          "mysql": "~2.9.0"
+     - npm install -g grunt-cli
+     - Dentro de la carpeta de nuestro proyecto
+     - npm init (completamos el formulario y ponemos yes)
+
+ Yo tenia creado ya el package.json y al realizar los pasos se me ha autocompletado.
+
+      {
+       "name": "application-name",
+       "name": "clasifica_empresas",
+        "version": "0.0.1",
+        "private": true,
+        "scripts": {
+           "start": "nodejs ./bin/www"
+         "start": "nodejs ./bin/www"
+        },
+        "dependencies": {
+           "express": "~4.0.0",
+           "static-favicon": "~1.0.0",
+           "morgan": "~1.0.0",
+           "cookie-parser": "~1.0.1",
+           "body-parser": "~1.0.0",
+           "debug": "~0.7.4",
+           "jade": "~1.3.0",
+           "mysql": "~2.9.0"
+       }
+         "express": "~4.0.0",
+         "static-favicon": "~1.0.0",
+         "morgan": "~1.0.0",
+         "cookie-parser": "~1.0.1",
+         "body-parser": "~1.0.0",
+         "debug": "~0.7.4",
+         "jade": "~1.3.0",
+         "mysql": "~2.9.0"
+       },
+       "devDependencies": {
+         "docco": "^0.7.0",
+         "grunt": "^0.4.5",
+         "grunt-docco": "^0.4.0",
+         "should": "^7.1.1",
+         "supertest": "^1.1.0"
+       },
+       "description": "Sitio Web con las siguientes funcionalidades:",
+       "main": "app.js",
+       "repository": {
+         "type": "git",
+         "url": "githttps://github.com/cr13/Califica_empresas.git"
+       },
+       "author": "Cristóbal Rodríguez Reina",
+       "license": "ISC",
+       "bugs": {
+         "url": "https://github.com/cr13/Califica_empresas/issues"
+       },
+       "homepage": "https://github.com/cr13/Califica_empresas#readme"
       }
-    }
 
 
 ----------
