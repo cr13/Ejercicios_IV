@@ -67,6 +67,7 @@ Pasos para hacer funcionar nuestra app en Heroku
     sudo heroku auth:token
     - copiar el token
     git push heroku master
+    
     - En username podeis dejarlo en blanco y en password pegar el codigo del token
 
     sudo heroku ps:scale web=1
@@ -86,7 +87,10 @@ Vamos a ver la porra en el navegador
 
 Añadimos .travis.yml al repositorio
 Activamos en travis el repositorio
+Sincronizamos el repositorio de github en heroku
 Activamos en heroku el CI
+
+![ActivamosCI](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/ciHeroku_zps2scsv0bz.png)
 
 
 
