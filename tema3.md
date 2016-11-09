@@ -67,9 +67,10 @@ Pasos para hacer funcionar nuestra app en Heroku
     sudo heroku auth:token
     - copiar el token
     git push heroku master
-    
+
     - En username podeis dejarlo en blanco y en password pegar el codigo del token
 
+    sudo heroku addons:open mongolab
     sudo heroku ps:scale web=1
     sudo heroku logs --tail // para activar el modo debug
     sudo heroku open  //para abrir en el navegador
