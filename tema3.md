@@ -93,8 +93,6 @@ Activamos en heroku el CI
 
 ![ActivamosCI](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/ciHeroku_zps2scsv0bz.png)
 
-
-
 ----------
 ###**Ejercicio 7**:Haz alguna modificación a tu aplicación en node.js para Heroku, sin olvidar añadir los tests para la nueva funcionalidad, y configura el despliegue automático a Heroku usando Snap CI o alguno de los otros servicios, como Codeship, mencionados en StackOverflow
 
