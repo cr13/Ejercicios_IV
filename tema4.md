@@ -67,8 +67,25 @@ Para mas información sobre nuestro contenedor:
 ###**Ejercicio 4**:
 ####**1)**: Instalar lxc-webpanel y usarlo para arrancar, parar y visualizar las máquinas virtuales que se tengan instaladas.
 
+Para instalar el [lxc-webpanel](http://lxc-webpanel.github.io/install.html) tenemos que hacerlo desde el usuario root.
+    sudo su
+    wget https://lxc-webpanel.github.io/tools/install.sh -O - | bash
+
+![intalaciónLXC-webpanel](http://lxc-webpanel.github.io/install.html)
+
+Desde el navegador localhost:5000 nos logueamos con usuario: admin y passwords: admin
+
+![lxcwebpanelLogin](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/lxcweb_zpsw9otrrar.png)
+
+Una vez logueados nos aparecerá una página de administracion de nuestros contenedores
+
+![lxcwebpanelAdministración](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/lxcwebpanel_zpsitzdzhzx.png)
+
 ####**2)**: Desde el panel restringir los recursos que pueden usar: CPU shares, CPUs que se pueden usar (en sistemas multinúcleo) o cantidad de memoria.
 
+Vamos a restringir los recursos del contenedor boxCentos
+
+![restringirRecursos](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/adminlxcpanel_zpse6ojupku.png)
 
 ----------
 ###**Ejercicio 5**: Comparar las prestaciones de un servidor web en una jaula y el mismo servidor en un contenedor. Usar nginx.
@@ -77,7 +94,16 @@ Para mas información sobre nuestro contenedor:
 ----------
 ###**Ejercicio 6**: Instalar docker.
 
+Para instalar Docker tenemos que ejecutar el siguiente comando:
 
+    sudo apt-get install docker.io
+    sudo docker -d & --> Lo iniciamos
+    O también:
+    sudo service docker start
+    sudo service docker status -> Comprueba el estado del servicio
+    sudo docker run hello-world -> Comprobamos que funciona 
+
+![sudo docker run hello-world](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/docker_zpsu6yfofep.png)
 ----------
 ###**Ejercicio 7**:
 ####**1)**: Instalar a partir de docker una imagen alternativa de Ubuntu y alguna adicional, por ejemplo de CentOS.
