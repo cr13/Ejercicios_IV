@@ -64,6 +64,8 @@ Creamos una imagen de disco virtual con:
 
     qemu-system-x86_64 -machine accel=kvm -hda debian.qcow2 -cdrom debian-8.6.0-amd64-i386-netinst.iso -m 1G -boot d
 
+![debian](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/debianQEMU_zpspkuvvdzy.png)
+
 **CoreOS**
 
 Creamos una imagen de disco virtual con:
@@ -105,30 +107,83 @@ Voy ha usar el benchmark de Sysbench
 
 1. Instalamos el sysbench:
 
-    sudo apt-get install sysbench**
+    sudo apt-get install sysbench
 
 2. Creamos un entorno de trabajo:
 
-    sysbench --test=fileio --file-total-size=5G prepare
+    sysbench --test=fileio --file-total-size=500MB prepare
 
 3. Ejecutamos los tests y mostramos los resultados:
 
-    sysbench --test=fileio --file-total-size=5G \
+    sysbench --test=fileio --file-total-size=500MB \
            --file-test-mode=rndrw --init-rng=on \
            --max-time=300 --max-requests=0 run
 
 4. Limpiamos el espacio ocupado:
 
-    sysbench --test=fileio --file-total-size=5G cleanup
+    sysbench --test=fileio --file-total-size=500MB cleanup
 
 ----------
 ###**Ejercicio 4**:Crear una máquina virtual Linux con 512 megas de RAM y entorno gráfico LXDE a la que se pueda acceder mediante VNC y **ssh**.
 
+Lo primero que tenemos que hacer es crear el espacio de almacenamiento:
+
+    qemu-img create -f qcow2 lubuntu.qcow2 6G
+
+[Descargamos lubuntu](http://cdimage.ubuntu.com/lubuntu/releases/16.04/release/) y lo instalamos como en los ejercicios anteriores:
+
+    qemu-system-x86_64 -machine accel=kvm -hda lubuntu.qcow2 -cdrom lubuntu-16.10-desktop-i386.iso -m 512M -boot d
+
+Ahora accedemos a la máquina de la siguiente forma:
+
+    qemu-system-x86_64 -machine accel=kvm -hda lubuntu.qcow2 -m 512M -vnc :1 &
+
+Una vez iniciada la máquina instalamos vinagre en el anfitrión:
+
+    sudo apt-get install vinagre
+
+Para ver el escritorio usando vinagre usamos:
+
+    vinagre :1
+
+![Visor escritorio remoto](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/escritorioRemotoLubuntuQemu_zpsx42tffbr.png)
+
+Ahora instalamos ssh en la máquina Lubuntu:
+
+    sudo apt-get install openssh-server
+
+Reiniciamos la máquina, para ello hago un NAT del puerto 2222 de la máquina host al puerto 22 de la invitada:
+
+    qemu-system-x86_64 -machine accel=kvm -hda lubuntu.qcow2 -m 512M -redir tcp:2222::22
+
+Vamos a acceder remotamente y vamos a crear la carpeta prueba en el escritorio:
+
+    //Accedemos mediante ssh
+    ssh lubunutcr13@localhost -p 2222
+
+![ssh_lubuntu](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/sshLubuntu_zpskxjr6ej1.png)
 ----------
 ###**Ejercicio 5**: Crear una máquina virtual ubuntu e instalar en ella alguno de los servicios que estamos usando en el proyecto de la asignatura.
 
+Creamos el espacio de almacenamiento:
+
+    qemu-img create -f qcow2 ubuntu16_04.qcow2 6G
+
+[Descargamos ubuntu server](http://releases.ubuntu.com/16.04.1/) y lo instalamos como en los ejercicios anteriores:
+
+    qemu-system-x86_64 -machine accel=kvm -hda ubuntu16_04.qcow2 -cdrom ubuntu-16.04.1-server-i386.iso -m 1G -boot d
 
 ----------
 ###**Ejercicio 6**: Instalar una máquina virtual con Linux Mint para el hipervisor que tengas instalado.
+
+Creamos el espacio de almacenamiento:
+
+    qemu-img create -f qcow2 lmint.qcow2 8G
+
+Se [descarga](https://www.linuxmint.com/download.php) e instala la imagen:
+
+    qemu-system-x86_64 -machine accel=kvm -hda lmint.qcow2 -cdrom linuxmint-18.1-cinnamon-32bit.iso -m 1G -boot d
+
+![Linux Mint](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/linux_mint_Qemu_zpsjphspq2x.png)
 
 ----------
