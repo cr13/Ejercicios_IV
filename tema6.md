@@ -2,6 +2,15 @@
 
 ###**Ejercicio 1**: Instalar chef en la máquina virtual que vayamos a usar
 
+Una forma rápida de instalarlo es:
+
+    curl -L https://www.opscode.com/chef/install.sh | sudo bash
+
+Para comprobar que la instalación se ha realizado:
+
+    chef-solo -v
+![chef-solo version](http://i1266.photobucket.com/albums/jj540/Juantan_Tonio/chef-solo_zpshpbivmvf.png)
+
 ----------
 ###**Ejercicio 2**: Crear una receta para instalar la aplicación que se viene creando en la asignatura en alguna máquina virtual o servidor en la nube.
 
