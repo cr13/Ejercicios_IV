@@ -1,5 +1,4 @@
-# Ejercicios_IV
-Ejercicios de Infraestructura Virtual
+# Ejercicios de Infraestructura Virtual
 
 * [Tema 1: Introducción a la infraestructura virtual: concepto y soporte físico](https://github.com/cr13/Ejercicios_IV/blob/master/tema1.md)
 * [Tema 2: Desarrollo basado en pruebas](https://github.com/cr13/Ejercicios_IV/blob/master/tema2.md)
