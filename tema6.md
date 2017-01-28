@@ -14,8 +14,12 @@ Para comprobar que la instalación se ha realizado:
 ----------
 ###**Ejercicio 2**: Crear una receta para instalar la aplicación que se viene creando en la asignatura en alguna máquina virtual o servidor en la nube.
 
+
+
 ----------
 ###**Ejercicio 3**: Desplegar la aplicación de DAI con todos los módulos necesarios usando un playbook de Ansible.
+
+En mi proyecto hay un ejemplo de como se usan los playbook de ansible, se pueden consultar [aquí](https://github.com/cr13/VIAJES_SIN_BARRERAS/blob/master/playbooks.yml)
 
 ----------
 ###**Ejercicio 4**: Instalar una máquina virtual Debian usando Vagrant y conectar con ella.
@@ -70,5 +74,7 @@ Ahora conectamos por ssh y comprobamos que efectivamente se ha instalado y ha ar
 
 ----------
 ###**Ejercicio 6**: Configurar tu máquina virtual usando vagrant con el provisionador chef.
+
+
 
 ----------
